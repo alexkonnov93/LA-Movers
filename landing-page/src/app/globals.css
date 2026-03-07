@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens (from Figma) ─────────────────────── */
+:root {
+  /* Colors */
+  --white: #ffffff;
+  --black: #000000;
+  --orange: #ff6d2e;
+  --yellow: #ffb362;
+  --medium-grey: #a6a7a9;
+  --light-grey: #f0f0f0;
+
+  /* Transparency */
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-10: rgba(255, 255, 255, 0.1);
+  --dark-60: rgba(35, 35, 35, 0.6);
+  --black-60: rgba(0, 0, 0, 0.6);
+  --black-50: rgba(0, 0, 0, 0.5);
+  --black-20: rgba(0, 0, 0, 0.2);
+
+  /* Gradients */
+  --hero-gradient: linear-gradient(
+      241.32deg,
+      rgba(191, 191, 191, 0) 16.09%,
+      rgba(0, 0, 0, 0.5) 73.66%
+    ),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
+  --orange-gradient: linear-gradient(180deg, #ff6d2e 27.78%, #502900 119.75%);
+}
+
+/* ─── Tailwind Theme ─────────────────────────────────── */
+@theme inline {
+  --color-white: var(--white);
+  --color-black: var(--black);
+  --color-orange: var(--orange);
+  --color-yellow: var(--yellow);
+  --color-medium-grey: var(--medium-grey);
+  --color-light-grey: var(--light-grey);
+  --color-dark-glass: var(--dark-60);
+  --color-black-glass: var(--black-60);
+  --font-sans: var(--font-inter-tight);
+  --font-heading: var(--font-graphik);
+}
+
+/* ─── Base Styles ────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* ─── Utility: hide scrollbar ────────────────────────── */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─── Utility: fine dashed border ────────────────────── */
+.divider-dashed {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--medium-grey) 0,
+    var(--medium-grey) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+/* ─── Google Places Autocomplete Dropdown ────────────── */
+.pac-container {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-top: 8px;
+  padding: 4px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.pac-container::after {
+  display: none; /* Hide "Powered by Google" */
+}
+
+.pac-item {
+  border: none;
+  padding: 10px 16px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.pac-item:hover,
+.pac-item.pac-item-selected {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.pac-item-query {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.pac-matched {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.pac-icon {
+  display: none;
+}
