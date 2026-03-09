@@ -1,57 +1,36 @@
-# Apartment Moving (/apartment-moving/)
+# Apartment Moving
 
-**Title Tag:** Apartment Movers in Los Angeles | The One Moving and Storage
-**Meta Description:** LA apartment movers who know the logistics — elevators, narrow hallways, parking permits, and stairs. No stair surcharges. Free quote in minutes.
-**H1:** Apartment Moving Services in Los Angeles
-
----
-
-## Trust Bar
-
-★ 5.0 Google Reviews | ★ 5.0 Yelp Reviews | A+ BBB Rated | CA License #[insert]
+**Route:** `/services/apartment-moving`
+**Status:** Not implemented
 
 ---
 
-## Main Copy
+## ServiceHero
 
-Apartment moves have their own challenges — narrow hallways, tight elevators, reserved freight times, street parking permits, and buildings that require insurance certificates. We've moved thousands of apartments across LA. We know the drill.
-
-**What we handle:**
-- Elevator reservations and freight elevator scheduling
-- Building insurance certificates (COI) when required
-- Street parking permits for the moving truck
-- Narrow hallway and stairwell navigation
-- Furniture disassembly to fit through tight doorways
-- Floor and wall protection in common areas
-
-**No stair surcharges.** Whether you're on the 1st floor or the 5th floor walkup, the price stays the same.
+- **title:** Apartment Moving Services in Los Angeles
+- **subtitle:** Apartment moves have their own challenges — narrow hallways, tight elevators, reserved freight times, street parking permits, and buildings that require insurance certificates. We've moved thousands of apartments across LA. We know the drill.
+- **backgroundImage:** `/images/hero-apartment.png` *(needs asset)*
 
 ---
 
-## Apartment Types We Move
+## WhatsIncluded
 
-- Studio and 1-bedroom apartments
-- 2–3 bedroom apartments
-- Loft conversions
-- High-rise units with freight elevator requirements
-- Walkup buildings (no elevator)
-
----
-
-## FAQ Section
-
-**Q: Do you charge extra for stairs or elevators?**
-A: No. Stair carries and elevator moves are included in your rate.
-
-**Q: Can you get a COI for my building?**
-A: Yes. If your building requires a Certificate of Insurance, let us know and we'll provide it before moving day.
-
-**Q: What about parking for the truck?**
-A: We handle parking logistics. If a permit is needed, we'll coordinate it. If double-parking is the only option, our crew works fast to minimize time on the street.
+- **title:** What We Handle for Apartment Moves
+- **image:** `/images/whats-included-apartment.png` *(needs asset)*
+- **items:**
+  1. `tdesign:elevator` — Elevator reservations and freight elevator scheduling
+  2. `tdesign:file-safety` — Building insurance certificates (COI) when required
+  3. `tdesign:vehicle` — Street parking permits for the moving truck
+  4. `tdesign:arrow-right` — Narrow hallway and stairwell navigation
+  5. `tdesign:tools` — Furniture disassembly to fit through tight doorways
+  6. `tdesign:layers` — Floor and wall protection in common areas
 
 ---
 
-## CTA
+## WeMoveItAll
 
-Moving apartments? Get your free quote — no stair surcharges, no surprises.
-**[Get a Free Quote]** | **Call (323) 813-7177**
+- **cards:**
+  1. `/images/move-studio.png` *(needs asset)* — Studio and 1-bedroom
+  2. `/images/move-apartments.png` — 2–3 bedroom apartments
+  3. `/images/move-highrise.png` *(needs asset)* — High-rise units
+  4. `/images/move-walkup.png` *(needs asset)* — Walkup buildings

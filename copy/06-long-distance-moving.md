@@ -1,72 +1,36 @@
-# Long Distance Moving (/long-distance-moving/)
+# Long Distance Moving
 
-**Title Tag:** Long Distance Movers from Los Angeles | The One Moving and Storage
-**Meta Description:** Interstate moves from LA with dedicated trucks, GPS tracking, and guaranteed flat-rate pricing. No hidden fees. Licensed & insured. Free binding quote.
-**H1:** Long Distance Moving From Los Angeles
-
----
-
-## Trust Bar
-
-★ 5.0 Google Reviews | ★ 5.0 Yelp Reviews | A+ BBB Rated | CA License #[insert]
+**Route:** `/services/long-distance-moving`
+**Status:** Not implemented
 
 ---
 
-## Main Copy
+## ServiceHero
 
-Leaving LA? Whether you're heading to San Francisco, Phoenix, Denver, or New York, we manage every mile. Your belongings travel on a dedicated truck — no sharing space with other customers' items, no reloading at a warehouse, no mystery about where your stuff is.
-
-**Long distance services include:**
-- Interstate moves from Los Angeles to any state
-- Dedicated truck — your belongings travel alone
-- Full packing and crating services
-- GPS tracking with delivery updates
-- Guaranteed pickup and delivery windows
-- Binding flat-rate quotes — your price is locked
-- Storage-in-transit if your new home isn't ready
+- **title:** Long Distance Moving From Los Angeles
+- **subtitle:** Leaving LA? Whether you're heading to San Francisco, Phoenix, Denver, or New York, we manage every mile. Your belongings travel on a dedicated truck — no sharing space, no reloading at a warehouse, no mystery about where your stuff is.
+- **backgroundImage:** `/images/hero-long-distance.png` *(needs asset)*
 
 ---
 
-## How It Works
+## WhatsIncluded
 
-1. **Free In-Home or Virtual Estimate** — We inventory your items and provide a binding, flat-rate quote. No surprises.
-2. **Packing Day** — Our crew wraps, packs, and loads everything. Fragile items get special crating.
-3. **In Transit** — Your items travel on a dedicated truck with GPS tracking. You can check status anytime.
-4. **Delivery** — We arrive within the guaranteed window, unload, reassemble furniture, and place everything.
-
----
-
-## Delivery Timeframes
-
-| Destination | Estimated Delivery |
-|-------------|-------------------|
-| Within California | 2–5 days |
-| Arizona, Nevada | 3–6 days |
-| Pacific Northwest | 4–7 days |
-| Midwest | 7–10 days |
-| East Coast | 10–14 days |
-
-*Exact timeframes provided with your quote.*
+- **title:** What's Included in Every Long Distance Move
+- **image:** `/images/whats-included-longdistance.png` *(needs asset)*
+- **items:**
+  1. `tdesign:truck` — Dedicated truck — your belongings travel alone
+  2. `tdesign:package` — Full packing and crating services
+  3. `tdesign:location` — GPS tracking with delivery updates
+  4. `tdesign:calendar` — Guaranteed pickup and delivery windows
+  5. `tdesign:money` — Binding flat-rate quotes — your price is locked
+  6. `tdesign:storage` — Storage-in-transit if your new home isn't ready
 
 ---
 
-## FAQ Section
+## WeMoveItAll
 
-**Q: Is my quote guaranteed?**
-A: Yes. We provide binding estimates. Your price will not change unless you add items or services after the quote.
-
-**Q: What if I need storage between pickup and delivery?**
-A: We offer storage-in-transit. Your items stay in our secure facility until your new home is ready. No rush.
-
-**Q: How long does a long-distance move take?**
-A: Varies by distance — see delivery timeframes above. You'll receive a guaranteed delivery window with your quote.
-
-**Q: Do my items share a truck with other customers?**
-A: No. Your belongings travel on a dedicated truck. No co-loading, no mid-route warehouse transfers.
-
----
-
-## CTA
-
-Planning a long-distance move? Get your guaranteed flat-rate quote.
-**[Get a Free Quote]** | **Call (323) 813-7177**
+- **cards:**
+  1. `/images/move-houses.png` — Houses and estates
+  2. `/images/move-apartments.png` — Apartments and condos
+  3. `/images/move-offices.png` *(needs asset)* — Business relocations
+  4. `/images/move-specialty.png` *(needs asset)* — Specialty and fragile items
