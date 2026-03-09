@@ -22,6 +22,7 @@ export const colors = {
 
 // ─── Typography ──────────────────────────────────────────
 export const typography = {
+  // Headings — Graphik Semibold
   h1: {
     fontFamily: "var(--font-graphik)",
     fallback: "var(--font-inter-tight), system-ui, sans-serif",
@@ -30,6 +31,36 @@ export const typography = {
     lineHeight: 1,
     letterSpacing: "-3px",
   },
+  h2: {
+    fontFamily: "var(--font-graphik)",
+    fontWeight: 600,
+    fontSize: "64px",
+    lineHeight: 1,
+    letterSpacing: "-2.56px",
+  },
+  h3: {
+    fontFamily: "var(--font-graphik)",
+    fontWeight: 600,
+    fontSize: "48px",
+    lineHeight: 1.05,
+    letterSpacing: "-1.92px",
+  },
+  h4: {
+    fontFamily: "var(--font-graphik)",
+    fontWeight: 600,
+    fontSize: "32px",
+    lineHeight: 1.1,
+    letterSpacing: "-1.28px",
+  },
+  h5: {
+    fontFamily: "var(--font-graphik)",
+    fontWeight: 600,
+    fontSize: "20px",
+    lineHeight: 1.3,
+    letterSpacing: "-0.6px",
+  },
+
+  // Body — Inter Tight
   subtitle1: {
     fontFamily: "Inter Tight",
     fontWeight: 500,
@@ -37,19 +68,36 @@ export const typography = {
     lineHeight: 1.4,
     letterSpacing: "0px",
   },
-  body: {
+  subtitle2: {
+    fontFamily: "Inter Tight",
+    fontWeight: 500,
+    fontSize: "20px",
+    lineHeight: 1.4,
+    letterSpacing: "0px",
+  },
+  text18: {
+    fontFamily: "Inter Tight",
+    fontWeight: 500,
+    fontSize: "18px",
+    lineHeight: 1.4,
+    letterSpacing: "0px",
+  },
+  text16: {
     fontFamily: "Inter Tight",
     fontWeight: 400,
     fontSize: "16px",
     lineHeight: 1.4,
     letterSpacing: "0px",
   },
-  navLink: {
+  text14: {
     fontFamily: "Inter Tight",
     fontWeight: 500,
-    fontSize: "16px",
+    fontSize: "14px",
     lineHeight: 1.4,
+    letterSpacing: "0px",
   },
+
+  // Semantic aliases
   button: {
     fontFamily: "Inter Tight",
     fontWeight: 600,
@@ -60,12 +108,6 @@ export const typography = {
     fontFamily: "Inter Tight",
     fontWeight: 600,
     fontSize: "18px",
-    lineHeight: 1.4,
-  },
-  formLabel: {
-    fontFamily: "Inter Tight",
-    fontWeight: 500,
-    fontSize: "14px",
     lineHeight: 1.4,
   },
   formPlaceholder: {

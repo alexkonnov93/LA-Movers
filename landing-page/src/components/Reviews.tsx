@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import ReviewCard from "./ReviewCard";
 import ButtonBlack from "./ButtonBlack";
 import type { Review } from "./ReviewCard";
@@ -31,39 +34,64 @@ const reviews: Review[] = [
 
 export default function Reviews() {
   return (
-    <section className="px-2 pt-2">
-      <div className="overflow-hidden rounded-[52px] bg-light-grey px-8 py-[58px] sm:px-14">
+    <section className="px-[6px] pt-[6px] sm:px-2 sm:pt-2">
+      <div className="overflow-hidden rounded-[32px] bg-light-grey px-[20px] pt-[32px] pb-[20px] sm:rounded-[52px] sm:px-8 sm:py-[58px] sm:px-14">
         {/* Header */}
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex flex-col gap-4">
-            <h2 className="font-[family-name:var(--font-graphik)] text-[40px] leading-none tracking-[-1.6px] sm:text-[52px] sm:tracking-[-2.08px] lg:text-[64px] lg:tracking-[-2.56px]">
+        <div className="flex flex-col gap-[12px] sm:gap-6 sm:flex-row sm:items-start sm:justify-between">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col gap-[12px] sm:gap-4"
+          >
+            <h2 className="font-[family-name:var(--font-graphik)] text-[32px] leading-[1.1] tracking-[-1.28px] sm:text-[52px] sm:tracking-[-2.08px] lg:text-[64px] lg:tracking-[-2.56px]">
               Don&apos;t Just Take
               <br />
               Our Word for It
             </h2>
-            <p className="text-[18px] font-medium leading-[1.4] text-[#777778] sm:text-[20px] lg:w-[580px]">
+            <p className="w-[272px] text-[16px] font-medium leading-[1.4] text-[#777778] sm:w-auto sm:text-[20px] lg:w-[580px]">
               See our customer real reviews from real LA moves
             </p>
-          </div>
+          </motion.div>
           <ButtonBlack
             href="https://www.google.com/maps/place/The+One+Moving+and+Storage+Inc./@34.1046582,-118.3076993,17z/data=!4m8!3m7!1s0x80c2bf5a5c5ace43:0x44de70d9aa73a6f!8m2!3d34.1046582!4d-118.3076993!9m1!1b1!16s%2Fg%2F11h5q8cjlp"
             target="_blank"
             rel="noopener noreferrer"
+            className="!hidden sm:!inline-flex"
           >
             All Reviews
           </ButtonBlack>
         </div>
 
         {/* Review Grid */}
-        <div className="mt-16 grid gap-x-16 gap-y-16 sm:grid-cols-2">
+        <div className="mt-[32px] flex flex-col gap-[24px] sm:mt-16 sm:grid sm:grid-cols-2 sm:gap-x-16 sm:gap-y-16">
           {reviews.map((review, i) => (
-            <ReviewCard
+            <motion.div
               key={review.name}
-              review={review}
-              showBorder={i < reviews.length - 2}
-            />
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
+            >
+              <ReviewCard
+                review={review}
+                showBorder={i < reviews.length - 2}
+                mobileShowBorder={i < reviews.length - 1}
+              />
+            </motion.div>
           ))}
         </div>
+
+        {/* Mobile-only bottom button */}
+        <ButtonBlack
+          href="https://www.google.com/maps/place/The+One+Moving+and+Storage+Inc./@34.1046582,-118.3076993,17z/data=!4m8!3m7!1s0x80c2bf5a5c5ace43:0x44de70d9aa73a6f!8m2!3d34.1046582!4d-118.3076993!9m1!1b1!16s%2Fg%2F11h5q8cjlp"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-[24px] w-full justify-center text-[14px] sm:hidden"
+        >
+          All Reviews
+        </ButtonBlack>
       </div>
     </section>
   );

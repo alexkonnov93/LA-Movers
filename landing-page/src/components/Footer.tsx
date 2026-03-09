@@ -15,27 +15,28 @@ const company = ["About Us", "Rates", "FAQ"];
 
 export default function Footer() {
   return (
-    <footer className="bg-black px-8 pt-[54px] pb-[100px] sm:px-[68px]">
-      <div className="flex flex-col gap-12 lg:flex-row lg:items-stretch lg:justify-between">
+    <footer className="bg-black px-[24px] pt-[32px] pb-[104px] sm:px-8 sm:pt-[54px] sm:pb-[100px] sm:px-[68px]">
+      <div className="flex flex-col gap-[40px] lg:flex-row lg:items-stretch lg:justify-between">
         {/* Left — Logo + tagline */}
-        <div className="flex flex-col justify-between gap-10 lg:w-[213px]">
+        <div className="flex flex-col gap-[12px] lg:justify-between lg:gap-10 lg:w-[213px]">
           <Image
             src="/images/logo-white.svg"
             alt="The One Moving & Storage"
             width={162}
             height={63}
+            className="h-[48px] w-[124px] sm:h-[63px] sm:w-[162px]"
           />
-          <p className="font-[family-name:var(--font-graphik)] text-[14px] leading-[1.2] tracking-[-0.42px] text-[#777778]">
+          <p className="w-[213px] font-[family-name:var(--font-graphik)] text-[14px] leading-[1.2] tracking-[-0.42px] text-[#777778]">
             Just a team that cares about getting your move done right
           </p>
         </div>
 
         {/* Right — Menu + bottom bar */}
-        <div className="flex flex-col justify-between gap-12 lg:w-[640px]">
+        <div className="flex flex-col gap-[40px] lg:justify-between lg:w-[640px]">
           {/* Nav columns */}
-          <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
+          <div className="flex flex-wrap gap-[48px_64px] sm:justify-between">
             {/* Services */}
-            <div className="flex flex-col gap-[21px]">
+            <div className="flex flex-col gap-[20px]">
               <span className="font-[family-name:var(--font-graphik)] text-[16px] leading-[1.05] tracking-[-0.48px] text-white">
                 Services
               </span>
@@ -51,7 +52,7 @@ export default function Footer() {
             </div>
 
             {/* Company */}
-            <div className="flex flex-col gap-[21px]">
+            <div className="flex flex-col gap-[20px]">
               <span className="font-[family-name:var(--font-graphik)] text-[16px] leading-[1.05] tracking-[-0.48px] text-white">
                 Company
               </span>
@@ -67,7 +68,7 @@ export default function Footer() {
             </div>
 
             {/* Get in Touch */}
-            <div className="flex flex-col gap-[21px]">
+            <div className="flex flex-col gap-[20px]">
               <span className="font-[family-name:var(--font-graphik)] text-[16px] leading-[1.05] tracking-[-0.48px] text-white">
                 Get in Touch
               </span>
@@ -88,8 +89,8 @@ export default function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex flex-col gap-4 text-[14px] font-medium leading-[1.4] text-[#777778] sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex gap-7">
+          <div className="flex flex-col gap-[16px] text-[14px] font-medium leading-[1.4] text-[#777778] sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex gap-[27px]">
               <a href="#" className="transition-colors hover:text-white">
                 Privacy Policy
               </a>

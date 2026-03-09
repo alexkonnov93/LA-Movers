@@ -35,10 +35,10 @@ export default function Faq() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="px-6 pt-[80px] pb-[120px] lg:px-[68px]">
-      <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
+    <section className="px-[16px] pt-[48px] pb-[60px] sm:px-6 sm:pt-[80px] sm:pb-[120px] lg:px-[68px]">
+      <div className="flex flex-col gap-[32px] sm:gap-10 lg:flex-row lg:items-start lg:justify-between">
         {/* Title */}
-        <h2 className="shrink-0 font-[family-name:var(--font-graphik)] text-[36px] leading-[1.05] tracking-[-1.44px] sm:text-[48px] sm:tracking-[-1.92px] lg:w-[656px]">
+        <h2 className="shrink-0 font-[family-name:var(--font-graphik)] text-[32px] leading-[1.1] tracking-[-1.28px] sm:text-[48px] sm:leading-[1.05] sm:tracking-[-1.92px] lg:w-[656px]">
           Questions?
           <br />
           We&apos;ve Got Answers

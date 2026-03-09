@@ -47,3 +47,44 @@ Copy/content docs are in `/Users/user/Desktop/a3rr/Movers_Web/copy/*.md` (outsid
 - `@/*` path alias maps to `./src/*`
 - Responsive: mobile-first with `sm:`, `md:`, `lg:` breakpoints
 - Max content width: `max-w-[1200px]`; page horizontal padding: `px-6 lg:px-[120px]`
+
+## Navbar
+
+The `Navbar` component is **fixed** (`fixed top-0 z-50`). Pages that don't use a full-screen hero must add `pt-[96px]` to compensate for the navbar height.
+
+**Props:**
+- `variant`: `"dark"` (default) — white text, glass bg. `"light"` — orange CTA, dark phone icon, for white-bg pages.
+- `showQuoteButton`: `boolean` (default `false`) — shows "Get a Free Quote" button linking to `/contact`. Currently only enabled on the About page.
+
+**Nav links:** Services → `/services/residential-moving`, Rates → `/rates`, Company → `/about`, Contact → `/contact`
+
+## Animations (Framer Motion)
+
+All sections use `whileInView` scroll-triggered animations with `viewport={{ once: true }}`.
+
+**Hero sections** (on page load):
+- Background image: slow zoom-out `scale: 1.1 → 1` over 1.8s
+- Title: word-by-word reveal with blur-to-sharp + slide-up (pass title as plain string, not JSX, for word splitting)
+- Subtitle: fade-up at 1.0s delay
+- Tag pill / Google badge: fade-up with staggered delays
+
+**Dark card sections** (WhyUs, OurValues, WhatsIncluded):
+- Heading: fade-up on scroll
+- Icon items: staggered fade-up (100ms apart)
+- Right-side photo: `clip-path: inset()` reveal animation
+
+**Other sections:**
+- PhotoBanner: clip-path reveal + scale
+- LaLocations: clip-path reveal, glass card slides up, location tags pop in
+- Reviews: heading fade-up, review cards staggered
+- WeMoveItAll: heading fade-up, cards staggered with scale
+
+## Pages
+
+| Route | Hero Component | Navbar variant |
+|-------|---------------|----------------|
+| `/` | `Hero` | dark |
+| `/services/*` | `ServiceHero` | dark |
+| `/rates` | `PageHero` | dark |
+| `/about` | `AboutHero` | light + showQuoteButton |
+| `/contact` | (no hero, just Navbar) | light |

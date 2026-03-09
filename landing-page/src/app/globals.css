@@ -76,6 +76,25 @@ body {
   background-position: bottom;
 }
 
+.divider-dashed-mobile {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--medium-grey) 0,
+    var(--medium-grey) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+@media (min-width: 640px) {
+  .divider-dashed-mobile {
+    background-image: none;
+  }
+}
+
 /* ─── Google Places Autocomplete Dropdown ────────────── */
 .pac-container {
   background: rgba(0, 0, 0, 0.85);

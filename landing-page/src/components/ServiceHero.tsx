@@ -7,21 +7,30 @@ import Navbar from "./Navbar";
 import AddressInput from "@/components/AddressInput";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 
-export default function Hero() {
+interface ServiceHeroProps {
+  title: React.ReactNode;
+  subtitle: string;
+  backgroundImage: string;
+}
+
+export default function ServiceHero({
+  title,
+  subtitle,
+  backgroundImage,
+}: ServiceHeroProps) {
   const [moveSize, setMoveSize] = useState("");
   const [isSticky, setIsSticky] = useState(false);
   const { setOpen: setMobileQuoteOpen } = useQuoteModal();
   const formRef = useRef<HTMLDivElement>(null);
   const [layout, setLayout] = useState({ height: 0, offset: 0, ready: false });
 
-  // Measure form height & distance from viewport bottom on mount
   useEffect(() => {
     const measure = () => {
       if (!formRef.current) return;
       const rect = formRef.current.getBoundingClientRect();
       setLayout({
         height: rect.height,
-        offset: window.innerHeight - rect.bottom, // hero pb-[60px] ≈ 60
+        offset: window.innerHeight - rect.bottom,
         ready: true,
       });
     };
@@ -30,12 +39,14 @@ export default function Hero() {
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Toggle sticky on any scroll
   useEffect(() => {
     const handleScroll = () => setIsSticky(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Extract plain text from title for word-by-word animation
+  const titleText = typeof title === "string" ? title : null;
 
   return (
     <section className="relative flex h-screen flex-col items-center sm:min-h-screen sm:h-auto sm:pb-[60px]">
@@ -48,13 +59,12 @@ export default function Hero() {
         transition={{ duration: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <Image
-          src="/images/hero-bg.png"
+          src={backgroundImage}
           alt=""
           fill
           priority
           className="object-cover"
         />
-        {/* Mobile: vertical gradient; Desktop: diagonal gradient */}
         <div
           className="absolute inset-0 sm:hidden"
           style={{
@@ -74,14 +84,13 @@ export default function Hero() {
       {/* Navbar */}
       <Navbar />
 
-      {/* Flexible spacer — pushes content toward bottom */}
+      {/* Flexible spacer */}
       <div className="min-h-0 flex-1" />
 
       {/* Content */}
       <div className="relative flex w-full max-w-[1200px] flex-col items-start px-4 sm:px-6 sm:gap-[48px] lg:px-0">
-        {/* Header Block — 800px max on desktop */}
         <div className="flex w-full flex-col gap-[20px] items-start sm:gap-[32px] lg:w-[800px]">
-          {/* Google Reviews Badge — on mobile appears first */}
+          {/* Google Reviews Badge */}
           <motion.a
             href="https://www.google.com/maps/place/The+One+Moving+and+Storage+Inc./@34.1046582,-118.3076993,17z/data=!4m8!3m7!1s0x80c2bf5a5c5ace43:0x44de70d9aa73a6f!8m2!3d34.1046582!4d-118.3076993!9m1!1b1!16s%2Fg%2F11h5q8cjlp?entry=ttu&g_ep=EgoyMDI2MDMwMi4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
@@ -124,36 +133,45 @@ export default function Hero() {
 
           {/* Text */}
           <div className="flex w-full flex-col gap-[12px] items-start pb-[20px] text-white sm:order-1 sm:gap-[16px] sm:pb-0">
-            <h1 className="font-[family-name:var(--font-graphik)] text-[40px] leading-[1.05] tracking-[-1.2px] sm:text-[56px] sm:tracking-[-1.8px] lg:text-[80px] lg:tracking-[-2.4px]">
-              {"Los Angeles Movers You Can Actually Count On".split(" ").map((word, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  transition={{
-                    duration: 0.4,
-                    delay: 0.3 + i * 0.08,
-                    ease: [0.25, 0.1, 0.25, 1],
-                  }}
-                  className="mr-[0.25em] inline-block"
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </h1>
+            <h2 className="font-[family-name:var(--font-graphik)] text-[32px] leading-none tracking-[-1.28px] sm:text-[52px] sm:tracking-[-2.08px] lg:text-[64px] lg:tracking-[-2.56px]">
+              {titleText
+                ? titleText.split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      transition={{
+                        duration: 0.4,
+                        delay: 0.3 + i * 0.08,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      }}
+                      className="mr-[0.25em] inline-block"
+                    >
+                      {word}
+                    </motion.span>
+                  ))
+                : <motion.span
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                    className="inline"
+                  >
+                    {title}
+                  </motion.span>
+              }
+            </h2>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
-              className="w-[304px] text-[18px] font-medium leading-[1.4] opacity-90 sm:w-full sm:text-[22px] sm:opacity-100 lg:w-[680px]"
+              className="text-[18px] font-medium leading-[1.4] opacity-90 sm:w-full sm:text-[20px] sm:opacity-100 lg:w-[721px]"
             >
-              No hidden fees. On-time arrival guaranteed. Licensed, insured,
-              <span className="hidden sm:inline"> and rated 5 stars by hundreds of LA families and businesses.</span>
+              {subtitle}
             </motion.p>
           </div>
         </div>
 
-        {/* Placeholder — reserves space in the hero when form becomes fixed (desktop only) */}
+        {/* Placeholder for fixed form */}
         <div id="quote" className="hidden sm:block" style={{ minHeight: layout.height }} />
       </div>
 
@@ -171,7 +189,6 @@ export default function Hero() {
               Current
             </span>
           </div>
-          {/* Road with truck */}
           <div className="relative flex h-[39px] flex-1 flex-col items-center justify-end pb-[12px]">
             <svg
               width={32}
@@ -214,7 +231,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Desktop Form — fixed once measured, animated via transform & max-width */}
+      {/* Desktop Form — fixed once measured */}
       <div
         ref={formRef}
         className={`hidden sm:block ${
@@ -251,7 +268,6 @@ export default function Hero() {
               borderRadius: isSticky ? 0 : 16,
             }}
           >
-            {/* Orange Left Decoration — rounded left corners in hero state */}
             <div
               className="h-[81px] w-[10px] shrink-0 self-stretch"
               style={{
@@ -262,26 +278,22 @@ export default function Hero() {
               }}
             />
 
-            {/* Form Fields */}
             <form className="flex w-full items-center">
-              {/* Moving From */}
               <AddressInput
                 label="Moving From"
                 placeholder="Current Zip / City"
                 className="flex-1 border-r border-[var(--white-10)] self-stretch py-0 pl-[20px] pr-[24px]"
               />
-
-              {/* Moving To */}
               <AddressInput
                 label="Moving To"
                 placeholder="Destination Zip / City"
                 className="flex-1 border-r border-[var(--white-10)] self-stretch py-0 pl-[20px] pr-[24px]"
               />
 
-              {/* Home or Office / Select Size */}
+              {/* Home Size */}
               <div className="group flex w-[280px] items-center gap-[16px] self-stretch pl-[20px] pr-[24px] transition-colors hover:bg-white/5">
                 <div className="flex flex-1 flex-col items-start font-medium leading-[1.4] text-white/50">
-                  <span className="text-[14px]">Home or Office</span>
+                  <span className="text-[14px]">Home Size</span>
                   <select
                     value={moveSize}
                     onChange={(e) => setMoveSize(e.target.value)}
@@ -293,8 +305,6 @@ export default function Hero() {
                     <option value="2bed">2 Bedrooms</option>
                     <option value="3bed">3 Bedrooms</option>
                     <option value="4bed">4+ Bedrooms</option>
-                    <option value="office-small">Small Office</option>
-                    <option value="office-large">Large Office</option>
                   </select>
                 </div>
                 <Image
@@ -306,7 +316,6 @@ export default function Hero() {
                 />
               </div>
 
-              {/* CTA Button — rounded right corners in hero state */}
               <div
                 className="flex self-stretch items-center p-[4px]"
                 style={{

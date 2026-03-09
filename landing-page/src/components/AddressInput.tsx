@@ -41,6 +41,8 @@ interface AddressInputProps {
   label: string;
   placeholder: string;
   className?: string;
+  dropdownPosition?: "above" | "below";
+  variant?: "dark" | "light";
   onPlaceSelect?: (place: google.maps.places.PlaceResult) => void;
 }
 
@@ -49,8 +51,11 @@ function MockAddressInput({
   label,
   placeholder,
   className = "",
+  dropdownPosition = "above",
+  variant = "dark",
   onPlaceSelect,
 }: AddressInputProps) {
+  const isLight = variant === "light";
   const [value, setValue] = useState("");
   const [selected, setSelected] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -144,19 +149,21 @@ function MockAddressInput({
   return (
     <div
       ref={wrapperRef}
-      className={`relative min-w-0 cursor-text transition-colors ${
-        showDropdown || focused ? "bg-white/10" : "hover:bg-white/5"
+      className={`relative min-w-0 cursor-text ${
+        isLight
+          ? `border-b transition-colors ${showDropdown || focused ? "border-black" : "border-[#dcdcdc] hover:border-[#777778]"}`
+          : `transition-colors ${showDropdown || focused ? "bg-white/10" : "hover:bg-white/5"}`
       } ${className}`}
       onClick={handleCellClick}
     >
       {/* Inner row — clips content but not the dropdown */}
       <div className="flex h-full min-w-0 overflow-hidden items-center gap-[16px]">
         {/* Label + Input */}
-        <div className="flex min-w-0 flex-1 flex-col items-start gap-[2px] font-medium leading-[1.4] text-white/50">
+        <div className={`flex min-w-0 flex-1 flex-col items-start gap-[2px] font-medium leading-[1.4] ${isLight ? "text-[#777778]" : "text-white/50"}`}>
           <span className="text-[14px]">{label}</span>
 
           {selected && !open ? (
-            <span className="block w-full truncate text-[20px] text-white">
+            <span className={`block w-full truncate text-[20px] ${isLight ? "text-black" : "text-white"}`}>
               {value}
             </span>
           ) : (
@@ -177,8 +184,10 @@ function MockAddressInput({
               }}
               onBlur={() => setFocused(false)}
               onKeyDown={handleKeyDown}
-              className={`w-full overflow-hidden text-ellipsis bg-transparent text-[20px] placeholder-white/50 outline-none ${
-                value ? "text-white" : "text-white/50"
+              className={`w-full overflow-hidden text-ellipsis bg-transparent text-[20px] outline-none ${
+                isLight
+                  ? `placeholder-[#a6a7a9] ${value ? "text-black" : "text-[#a6a7a9]"}`
+                  : `placeholder-white/50 ${value ? "text-white" : "text-white/50"}`
               }`}
             />
           )}
@@ -189,31 +198,34 @@ function MockAddressInput({
           <button
             type="button"
             onClick={clear}
-            className="shrink-0 text-white/40 transition-colors hover:text-white/70"
+            className={`shrink-0 transition-colors ${isLight ? "text-black/30 hover:text-black/60" : "text-white/40 hover:text-white/70"}`}
           >
             <Icon icon="tdesign:close-circle-filled" width={24} height={24} />
           </button>
         )}
 
         {/* Chevron — flips when dropdown is open */}
-        <Image
-          src="/images/chevron-down.svg"
-          alt=""
-          width={12}
-          height={7}
-          className={`shrink-0 transition-all duration-200 ${
-            showDropdown
-              ? "rotate-180 opacity-80"
-              : "opacity-50"
-          }`}
+        <Icon
+          icon="tdesign:chevron-down"
+          className={`shrink-0 size-[12px] transition-all duration-200 ${
+            showDropdown ? "rotate-180 opacity-80" : "opacity-50"
+          } ${isLight ? "text-black" : "text-white"}`}
         />
       </div>
 
-      {/* Dropdown — opens upward, outside the clipped row */}
+      {/* Dropdown — opens above or below based on prop */}
       {showDropdown && (
         <ul
           ref={listRef}
-          className="absolute bottom-full left-0 right-0 z-50 mb-[8px] overflow-hidden rounded-[12px] bg-[rgba(0,0,0,0.9)] backdrop-blur-[12px]"
+          className={`absolute left-0 right-0 z-50 overflow-hidden rounded-[12px] border backdrop-blur-[12px] ${
+            isLight
+              ? "border-[#dcdcdc] bg-white shadow-lg"
+              : "border-[rgba(255,255,255,0.1)] bg-[#242424]"
+          } ${
+            dropdownPosition === "below"
+              ? "top-full mt-[8px]"
+              : "bottom-full mb-[8px]"
+          }`}
         >
           <div className="flex flex-col gap-[4px] px-[4px] py-[4px]">
             {filtered.map((addr, i) => (
@@ -222,9 +234,13 @@ function MockAddressInput({
                 onMouseDown={() => select(addr)}
                 onMouseEnter={() => setActiveIndex(i)}
                 className={`cursor-pointer px-[8px] py-[8px] text-[16px] font-medium leading-[1.4] transition-colors ${
-                  i === activeIndex
-                    ? "rounded-[8px] bg-white/10 text-white"
-                    : "rounded-[6px] text-[#dcdcdc]"
+                  isLight
+                    ? i === activeIndex
+                      ? "rounded-[8px] bg-black/5 text-black"
+                      : "rounded-[6px] text-[#777778]"
+                    : i === activeIndex
+                      ? "rounded-[8px] bg-white/10 text-white"
+                      : "rounded-[6px] text-[#dcdcdc]"
                 }`}
               >
                 {addr}

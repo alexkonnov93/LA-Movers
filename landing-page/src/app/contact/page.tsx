@@ -1,12 +1,7 @@
 "use client";
 
-import Hero from "@/components/Hero";
-import ShortVideos from "@/components/ShortVideos";
-import WhyUs from "@/components/WhyUs";
-import WhatWeDo from "@/components/WhatWeDo";
-import Reviews from "@/components/Reviews";
-import LaLocations from "@/components/LaLocations";
-import Faq from "@/components/Faq";
+import Navbar from "@/components/Navbar";
+import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import MobileQuoteModal from "@/components/MobileQuoteModal";
 import { QuoteModalProvider, useQuoteModal } from "@/lib/quote-modal-context";
@@ -16,20 +11,19 @@ function PageContent() {
 
   return (
     <>
-      <Hero />
-      <ShortVideos />
-      <WhyUs />
-      <WhatWeDo />
-      <Reviews />
-      <LaLocations />
-      <Faq />
+      {/* Navbar + spacer for fixed nav */}
+      <div className="pt-[96px]">
+        <Navbar variant="light" showQuoteButton={false} />
+      </div>
+
+      <ContactSection />
       <Footer />
       <MobileQuoteModal open={open} onClose={() => setOpen(false)} />
     </>
   );
 }
 
-export default function Home() {
+export default function ContactPage() {
   return (
     <QuoteModalProvider>
       <PageContent />
