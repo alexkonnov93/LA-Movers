@@ -31,7 +31,7 @@ export default function WhatMakesUsDifferent({ items }: WhatMakesUsDifferentProp
             className="flex flex-1 flex-col gap-[24px] sm:gap-[32px]"
           >
             <div className="relative size-[80px] sm:size-[100px]">
-              <Image src={item.icon} alt="" fill className="object-contain" />
+              <Image src={item.icon} alt="" fill sizes="100px" className="object-contain" />
             </div>
             <div className="flex flex-col gap-[10px]">
               <h3 className="font-[family-name:var(--font-graphik)] text-[20px] leading-[1.05] tracking-[-0.6px] text-black">

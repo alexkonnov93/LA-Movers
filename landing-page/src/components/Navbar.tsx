@@ -1,9 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Icon } from "@iconify/react";
 import { useQuoteModal } from "@/lib/quote-modal-context";
+
+const serviceLinks = [
+  { href: "/services/residential-moving", label: "Residential Moving" },
+  { href: "/services/business-relocation", label: "Business Relocation" },
+  { href: "/services/local-moving", label: "Local Moving" },
+  { href: "/services/long-distance-moving", label: "Long Distance Moving" },
+  { href: "/services/storage", label: "Secure Storage" },
+  { href: "/services/packing-services", label: "Professional Packing" },
+  { href: "/services/apartment-moving", label: "Apartment Moving" },
+  { href: "/services/same-day-moving", label: "Same-Day Moving" },
+  { href: "/services/senior-moving", label: "Senior Moving" },
+];
 
 interface NavbarProps {
   variant?: "dark" | "light";
@@ -12,6 +25,9 @@ interface NavbarProps {
 
 export default function Navbar({ variant = "dark", showQuoteButton = false }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
   const { setOpen: setQuoteOpen } = useQuoteModal();
 
   // Lock body scroll when mobile menu is open
@@ -25,6 +41,15 @@ export default function Navbar({ variant = "dark", showQuoteButton = false }: Na
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  const handleServicesEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setServicesOpen(true);
+  };
+
+  const handleServicesLeave = () => {
+    timeoutRef.current = setTimeout(() => setServicesOpen(false), 150);
+  };
 
   return (
     <>
@@ -90,8 +115,28 @@ export default function Navbar({ variant = "dark", showQuoteButton = false }: Na
               />
             </Link>
             <div className="flex items-center gap-[4px]">
+              {/* Services with dropdown */}
+              <div
+                onMouseEnter={handleServicesEnter}
+                onMouseLeave={handleServicesLeave}
+              >
+                <button
+                  className={`flex items-center gap-[8px] rounded-[10px] px-[16px] py-[8px] text-[16px] font-medium leading-[1.4] text-white transition-colors hover:bg-white/10 ${
+                    servicesOpen ? "bg-white/10" : ""
+                  }`}
+                >
+                  Services
+                  <Icon
+                    icon="tdesign:chevron-down"
+                    className={`size-[16px] text-white/70 transition-transform duration-200 ${
+                      servicesOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+              </div>
+
+              {/* Other nav links */}
               {[
-                { href: "/services/residential-moving", label: "Services" },
                 { href: "/rates", label: "Rates" },
                 { href: "/about", label: "Company" },
                 { href: "/contact", label: "Contact" },
@@ -141,6 +186,38 @@ export default function Navbar({ variant = "dark", showQuoteButton = false }: Na
         </div>
       </nav>
 
+      {/* Desktop: Services dropdown panel */}
+      <div
+        onMouseEnter={handleServicesEnter}
+        onMouseLeave={handleServicesLeave}
+        className={`fixed left-0 right-0 top-0 z-40 hidden pt-[100px] md:block ${
+          servicesOpen ? "pointer-events-auto" : "pointer-events-none"
+        }`}
+      >
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-[120px] flex justify-start">
+          <div
+            className={`w-[520px] rounded-[24px] bg-[rgba(25,25,25,0.85)] p-[24px] backdrop-blur-[24px] transition-all duration-250 ease-out ${
+              servicesOpen
+                ? "translate-y-0 opacity-100"
+                : "-translate-y-[8px] opacity-0"
+            }`}
+          >
+            <div className="grid grid-cols-2 gap-x-[24px] gap-y-[4px]">
+              {serviceLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-[16px] px-[20px] py-[14px] text-[16px] font-medium leading-[1.4] text-white transition-colors hover:bg-white/[0.06]"
+                  onClick={() => setServicesOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Mobile Fullscreen Menu */}
       <div
         className={`fixed inset-0 z-[60] flex flex-col bg-[rgba(0,0,0,0.9)] backdrop-blur-[12px] transition-all duration-300 ease-in-out md:hidden ${
@@ -188,9 +265,55 @@ export default function Navbar({ variant = "dark", showQuoteButton = false }: Na
         </div>
 
         {/* Menu Items */}
-        <div className="mt-[16px] flex flex-col px-[24px]">
+        <div className="mt-[16px] flex flex-1 flex-col overflow-y-auto px-[24px]">
+          {/* Services — accordion */}
+          <div
+            className={`border-b border-[var(--white-10)] transition-all duration-300 ease-out ${
+              mobileOpen
+                ? "translate-y-0 opacity-100"
+                : "-translate-y-[10px] opacity-0"
+            }`}
+            style={{ transitionDelay: mobileOpen ? "50ms" : "0ms" }}
+          >
+            <button
+              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+              className="flex w-full items-center justify-between py-[20px] text-[20px] font-medium leading-[1.4] text-white"
+            >
+              Services
+              <Icon
+                icon="tdesign:chevron-down"
+                className={`size-[20px] text-white transition-transform duration-200 ${
+                  mobileServicesOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {/* Sub-items */}
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                mobileServicesOpen ? "max-h-[500px] pb-[12px]" : "max-h-0"
+              }`}
+            >
+              <div className="flex flex-col gap-[4px] pl-[16px]">
+                {serviceLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="py-[10px] text-[16px] font-medium leading-[1.4] text-white/60 transition-colors hover:text-white"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileServicesOpen(false);
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Other nav items */}
           {[
-            { href: "/services/residential-moving", label: "Services" },
             { href: "/rates", label: "Rates" },
             { href: "/about", label: "Company" },
             { href: "/contact", label: "Contact" },
@@ -203,16 +326,13 @@ export default function Navbar({ variant = "dark", showQuoteButton = false }: Na
                   ? "translate-y-0 opacity-100"
                   : "-translate-y-[10px] opacity-0"
               }`}
-              style={{ transitionDelay: mobileOpen ? `${(i + 1) * 50}ms` : "0ms" }}
+              style={{ transitionDelay: mobileOpen ? `${(i + 2) * 50}ms` : "0ms" }}
               onClick={() => setMobileOpen(false)}
             >
               {item.label}
             </Link>
           ))}
         </div>
-
-        {/* Spacer */}
-        <div className="flex-1" />
 
         {/* Get a Quote Button */}
         <div

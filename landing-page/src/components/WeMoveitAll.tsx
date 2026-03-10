@@ -42,6 +42,7 @@ export default function WeMoveItAll({ title = "We move it all", cards }: WeMoveI
                 src={card.image}
                 alt=""
                 fill
+                sizes="(max-width: 640px) 50vw, 25vw"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-black/20" />

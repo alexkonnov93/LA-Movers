@@ -46,7 +46,7 @@ export default function OurValues({ items, image }: OurValuesProps) {
                     <Icon icon={item.icon} className="size-[24px] text-white sm:size-[32px]" />
                   ) : (
                     <div className="relative size-[24px] sm:size-[32px]">
-                      <Image src={item.icon} alt="" fill className="object-contain" />
+                      <Image src={item.icon} alt="" fill sizes="32px" className="object-contain" />
                     </div>
                   )}
                   <div className="flex flex-col gap-[8px]">
@@ -70,7 +70,7 @@ export default function OurValues({ items, image }: OurValuesProps) {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative h-[276px] overflow-hidden rounded-[24px] sm:h-auto sm:min-h-[300px] sm:flex-1 sm:rounded-[40px] lg:min-h-0"
           >
-            <Image src={image} alt="" fill className="object-cover" />
+            <Image src={image} alt="" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
           </motion.div>
         </div>
       </div>

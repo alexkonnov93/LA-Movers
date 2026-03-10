@@ -63,9 +63,10 @@ export default function WhyUs() {
             className="relative h-[276px] overflow-hidden rounded-[24px] sm:h-auto sm:min-h-[300px] sm:flex-1 sm:rounded-[40px] lg:min-h-0"
           >
             <Image
-              src="/images/why-us.png"
+              src="/images/why-us.jpg"
               alt="Inside a moving truck packed with carefully labeled boxes"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
           </motion.div>

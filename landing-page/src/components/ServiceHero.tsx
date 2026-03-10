@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Navbar from "./Navbar";
@@ -22,26 +22,48 @@ export default function ServiceHero({
   const [isSticky, setIsSticky] = useState(false);
   const { setOpen: setMobileQuoteOpen } = useQuoteModal();
   const formRef = useRef<HTMLDivElement>(null);
-  const [layout, setLayout] = useState({ height: 0, offset: 0, ready: false });
+  const placeholderRef = useRef<HTMLDivElement>(null);
+  const [formHeight, setFormHeight] = useState(0);
+  const [heroOffset, setHeroOffset] = useState(0);
+  const [ready, setReady] = useState(false);
 
+  // Measure form height via ResizeObserver
   useEffect(() => {
-    const measure = () => {
-      if (!formRef.current) return;
-      const rect = formRef.current.getBoundingClientRect();
-      setLayout({
-        height: rect.height,
-        offset: window.innerHeight - rect.bottom,
-        ready: true,
-      });
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    const el = formRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setFormHeight(el.offsetHeight));
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
+
+  // Compute hero offset from placeholder's document-absolute position
+  const measure = useCallback(() => {
+    const ph = placeholderRef.current;
+    if (!ph) return;
+    const rect = ph.getBoundingClientRect();
+    const absoluteBottom = rect.bottom + window.scrollY;
+    const offset = Math.max(0, window.innerHeight - absoluteBottom);
+    setHeroOffset(offset);
+    setReady(true);
+  }, []);
+
+  // Re-measure on mount, resize, and when formHeight changes
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      measure();
+      setTimeout(measure, 100);
+    });
+    window.addEventListener("resize", measure);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", measure);
+    };
+  }, [measure, formHeight]);
 
   useEffect(() => {
     const handleScroll = () => setIsSticky(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -63,6 +85,7 @@ export default function ServiceHero({
           alt=""
           fill
           priority
+          sizes="100vw"
           className="object-cover"
         />
         <div
@@ -172,7 +195,7 @@ export default function ServiceHero({
         </div>
 
         {/* Placeholder for fixed form */}
-        <div id="quote" className="hidden sm:block" style={{ minHeight: layout.height }} />
+        <div ref={placeholderRef} id="quote" className="hidden sm:block" style={{ minHeight: formHeight }} />
       </div>
 
       {/* Spacer for fixed mobile form bar */}
@@ -231,22 +254,17 @@ export default function ServiceHero({
         </div>
       </div>
 
-      {/* Desktop Form — fixed once measured */}
+      {/* Desktop Form — always fixed, positioned via transform */}
       <div
         ref={formRef}
-        className={`hidden sm:block ${
-          layout.ready ? "fixed bottom-0 left-0 right-0 z-40" : "relative w-full"
-        }`}
-        style={
-          layout.ready
-            ? {
-                transition: "transform 300ms ease-in-out",
-                transform: isSticky
-                  ? "translateY(0)"
-                  : `translateY(-${layout.offset}px)`,
-              }
-            : undefined
-        }
+        className="hidden sm:block fixed bottom-0 left-0 right-0 z-40"
+        style={{
+          transition: ready ? "transform 300ms ease-in-out" : "none",
+          transform: isSticky
+            ? "translateY(0)"
+            : `translateY(-${heroOffset}px)`,
+          opacity: ready ? 1 : 0,
+        }}
       >
         <div
           className="mx-auto"

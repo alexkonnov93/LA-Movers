@@ -1,17 +1,23 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const services = [
-  "Residential Moving",
-  "Business Relocation",
-  "Local Moving",
-  "Long Distance Moving",
-  "Packing Services",
-  "Apartment Moving",
-  "Same-Day Moving",
-  "Storage",
+  { label: "Residential Moving", href: "/services/residential-moving" },
+  { label: "Business Relocation", href: "/services/business-relocation" },
+  { label: "Local Moving", href: "/services/local-moving" },
+  { label: "Long Distance Moving", href: "/services/long-distance-moving" },
+  { label: "Packing Services", href: "/services/packing-services" },
+  { label: "Apartment Moving", href: "/services/apartment-moving" },
+  { label: "Same-Day Moving", href: "/services/same-day-moving" },
+  { label: "Secure Storage", href: "/services/storage" },
+  { label: "Senior Moving", href: "/services/senior-moving" },
 ];
 
-const company = ["About Us", "Rates", "FAQ"];
+const company = [
+  { label: "About Us", href: "/about" },
+  { label: "Rates", href: "/rates" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Footer() {
   return (
@@ -42,10 +48,10 @@ export default function Footer() {
               </span>
               <ul className="flex flex-col gap-3 text-[16px] font-medium leading-[1.4] text-[#777778]">
                 {services.map((s) => (
-                  <li key={s}>
-                    <a href="#" className="transition-colors hover:text-white">
-                      {s}
-                    </a>
+                  <li key={s.href}>
+                    <Link href={s.href} className="transition-colors hover:text-white">
+                      {s.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -58,10 +64,10 @@ export default function Footer() {
               </span>
               <ul className="flex flex-col gap-3 text-[16px] font-medium leading-[1.4] text-[#777778]">
                 {company.map((c) => (
-                  <li key={c}>
-                    <a href="#" className="transition-colors hover:text-white">
-                      {c}
-                    </a>
+                  <li key={c.href}>
+                    <Link href={c.href} className="transition-colors hover:text-white">
+                      {c.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

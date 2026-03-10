@@ -18,7 +18,7 @@ export default function PhotoBanner({ src, alt = "" }: PhotoBannerProps) {
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         className="relative h-[300px] overflow-hidden rounded-[32px] sm:h-[500px] sm:rounded-[52px] lg:h-[680px]"
       >
-        <Image src={src} alt={alt} fill className="object-cover" />
+        <Image src={src} alt={alt} fill sizes="100vw" className="object-cover" />
       </motion.div>
     </section>
   );

@@ -56,7 +56,7 @@ export default function ContactForm() {
           </div>
           <Icon
             icon="tdesign:chevron-down"
-            className="shrink-0 size-[12px] text-black opacity-50"
+            className="shrink-0 size-[20px] text-black opacity-50"
           />
         </div>
 

@@ -33,9 +33,10 @@ export default function LaLocations() {
       >
         {/* Background image */}
         <Image
-          src="/images/la-locations-bg.png"
+          src="/images/la-locations-bg.jpg"
           alt="Los Angeles beachside with palm trees"
           fill
+          sizes="100vw"
           className="object-cover"
         />
 

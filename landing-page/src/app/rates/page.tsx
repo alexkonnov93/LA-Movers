@@ -29,7 +29,7 @@ function PageContent() {
         tag="Rates"
         title={<>Transparent<br className="sm:hidden" /> Moving Rates</>}
         subtitle="We believe you should know exactly what you're paying for before moving day. Here's how our pricing works – no asterisks, no fine print."
-        backgroundImage="/images/hero-rates.png"
+        backgroundImage="/images/hero-rates.jpg"
       />
       <RateTable rows={rateRows} />
       <Footer />

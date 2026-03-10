@@ -67,9 +67,9 @@ function PageContent() {
         title="Moving made simple. No stress, no surprises."
         subtitle="We built the moving company we always wished existed – honest pricing, reliable crew, zero hidden fees."
       />
-      <PhotoBanner src="/images/about-banner.png" />
+      <PhotoBanner src="/images/about-banner.jpg" />
       <WhatMakesUsDifferent items={differentiators} />
-      <OurValues items={values} image="/images/about-values.png" />
+      <OurValues items={values} image="/images/about-values.jpg" />
       <Reviews />
       <Footer />
       <MobileQuoteModal open={open} onClose={() => setOpen(false)} />

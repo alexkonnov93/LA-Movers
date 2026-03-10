@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
 import { Icon } from "@iconify/react";
 
 const SAMPLE_ADDRESSES = [
@@ -207,7 +206,7 @@ function MockAddressInput({
         {/* Chevron — flips when dropdown is open */}
         <Icon
           icon="tdesign:chevron-down"
-          className={`shrink-0 size-[12px] transition-all duration-200 ${
+          className={`shrink-0 size-[20px] transition-all duration-200 ${
             showDropdown ? "rotate-180 opacity-80" : "opacity-50"
           } ${isLight ? "text-black" : "text-white"}`}
         />
@@ -354,12 +353,9 @@ function GoogleAddressInput({
           </button>
         )}
 
-        <Image
-          src="/images/chevron-down.svg"
-          alt=""
-          width={12}
-          height={7}
-          className="shrink-0 opacity-50 transition-opacity group-hover:opacity-80"
+        <Icon
+          icon="tdesign:chevron-down"
+          className={`shrink-0 size-[20px] opacity-50 transition-opacity group-hover:opacity-80 text-white`}
         />
       </div>
     </div>

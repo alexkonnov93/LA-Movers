@@ -19,10 +19,10 @@ const whatsIncludedItems = [
 ];
 
 const weMoveItAllCards = [
-  { image: "/images/move-houses.png", label: "Houses\nand condos" },
-  { image: "/images/move-apartments.png", label: "Apartments\nand townhomes" },
-  { image: "/images/move-seniors.png", label: "Senior moves\nand downsizing" },
-  { image: "/images/move-estates.png", label: "Estates and\nlarge properties" },
+  { image: "/images/move-houses.jpg", label: "Houses\nand condos" },
+  { image: "/images/move-apartments.jpg", label: "Apartments\nand townhomes" },
+  { image: "/images/move-seniors.jpg", label: "Senior moves\nand downsizing" },
+  { image: "/images/move-estates.jpg", label: "Estates and\nlarge properties" },
 ];
 
 function PageContent() {
@@ -33,13 +33,13 @@ function PageContent() {
       <ServiceHero
         title="Professional Residential Moving in Los Angeles"
         subtitle="Moving to a new home is a big deal. We make it simple. Our residential team handles everything from wrapping your dishes to reassembling your bed frame at your new place — and we don't leave until you're satisfied."
-        backgroundImage="/images/hero-residential.png"
+        backgroundImage="/images/hero-residential.jpg"
       />
       <ShortVideos />
       <WhatsIncluded
         title="What's Included in Every Residential Move"
         items={whatsIncludedItems}
-        image="/images/whats-included-residential.png"
+        image="/images/whats-included-residential.jpg"
       />
       <WeMoveItAll cards={weMoveItAllCards} />
       <Reviews />

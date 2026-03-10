@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Icon } from "@iconify/react";
 import Chevron from "./Chevron";
 
@@ -9,27 +10,32 @@ const services = [
   {
     icon: "tdesign:home",
     label: "Residential Moving",
-    image: "/images/service-residential.png",
+    image: "/images/service-residential.jpg",
+    href: "/services/residential-moving",
   },
   {
     icon: "tdesign:map-connection",
     label: "Business Relocation",
-    image: "/images/service-business.png",
+    image: "/images/service-business.jpg",
+    href: "/services/business-relocation",
   },
   {
     icon: "tdesign:vehicle",
     label: "Local Moving",
-    image: "/images/service-local.png",
+    image: "/images/service-local.jpg",
+    href: "/services/local-moving",
   },
   {
     icon: "tdesign:map",
     label: "Long Distance Moving",
-    image: "/images/service-long-distance.png",
+    image: "/images/service-long-distance.jpg",
+    href: "/services/long-distance-moving",
   },
   {
     icon: "tdesign:undertake-delivery",
     label: "Packing Services",
-    image: "/images/service-packing.png",
+    image: "/images/service-packing.jpg",
+    href: "/services/packing-services",
   },
 ];
 
@@ -94,8 +100,9 @@ export default function WhatWeDo() {
           className="scrollbar-hide -mx-[16px] flex gap-[6px] overflow-x-auto px-[16px] sm:-mx-6 sm:px-6 lg:-mx-[68px] lg:px-[68px]"
         >
           {services.map((service) => (
-            <div
+            <Link
               key={service.label}
+              href={service.href}
               className="group relative flex size-[240px] shrink-0 flex-col justify-between overflow-hidden rounded-[32px] p-[20px] sm:h-[320px] sm:w-[320px] sm:p-7"
             >
               {/* Background image + overlay */}
@@ -103,6 +110,7 @@ export default function WhatWeDo() {
                 src={service.image}
                 alt={service.label}
                 fill
+                sizes="320px"
                 className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
               />
               <div className="absolute inset-0 rounded-[32px] bg-black/20" />
@@ -138,7 +146,7 @@ export default function WhatWeDo() {
               <p className="relative font-[family-name:var(--font-graphik)] text-[16px] leading-[1.4] tracking-[-0.32px] text-white sm:text-[21px] sm:tracking-[-0.42px]">
                 {service.label}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
 

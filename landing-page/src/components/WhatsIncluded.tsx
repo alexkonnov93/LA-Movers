@@ -53,8 +53,8 @@ export default function WhatsIncluded({ title, items, image }: WhatsIncludedProp
 
           {/* Right — Image */}
           <motion.div
-            initial={{ clipPath: "inset(10% 10% 10% 10% round 40px)", opacity: 0 }}
-            whileInView={{ clipPath: "inset(0% 0% 0% 0% round 40px)", opacity: 1 }}
+            initial={{ clipPath: "inset(10% 10% 10% 10%)", opacity: 0 }}
+            whileInView={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative h-[276px] overflow-hidden rounded-[24px] sm:h-auto sm:min-h-[300px] sm:flex-1 sm:rounded-[40px] lg:min-h-0"
@@ -63,6 +63,7 @@ export default function WhatsIncluded({ title, items, image }: WhatsIncludedProp
               src={image}
               alt=""
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
           </motion.div>
